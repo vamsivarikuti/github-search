@@ -1,0 +1,56 @@
+<div>
+  <h3>Search github repositories</h3>
+
+  <div>
+    <div class="clearfix">
+
+      <div class="col-xs-4">
+        <form [formGroup]="searchForm" novalidate>
+          <div class="form-group">
+            <label>Search Text</label>
+            <input type="text" class="form-control" formControlName="query"/>
+          </div>
+          <div class="form-group">
+            <label>Sort</label>
+            <select class="form-control" formControlName="sort">
+              <option value="stars">stars</option>
+              <option value="forks">forks</option>
+              <option value="updated">updated</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label>Order</label>
+            <select class="form-control" formControlName="order">
+              <option value="desc">desc</option>
+              <option value="asc">asc</option>
+            </select>
+          </div>
+
+          <div class="btn btn-primary" (click)="getRepos(searchForm)">Submit</div>
+        </form>
+      </div>
+
+      <div class="col-xs-8">
+        <div *ngIf="isLoading" class="text-center">
+          <span class="glyphicon glyphicon-refresh spinning"></span>
+        </div>
+
+        <ul class="list-group repos-list">
+          <li class="list-group-item" *ngFor="let repo of repositories; let i = index">
+            {{i+1}}. <a [href]="repo.html_url" target="_blank">{{repo.full_name}}</a>
+
+            <div class="pull-right">
+              <div class="btn btn-xs btn-info">
+                Forks <span class="badge">{{repo.forks}}</span>
+              </div>
+              <div class="btn btn-xs btn-success">
+                Stars <span class="badge">{{repo.watchers}}</span>
+              </div>
+            </div>
+          </li>
+        </ul>
+
+      </div>
+    </div>
+  </div>
+</div>
