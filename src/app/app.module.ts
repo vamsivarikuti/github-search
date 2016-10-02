@@ -2,7 +2,7 @@ import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HttpModule } from '@angular/http';
-import { ButtonsModule } from 'ng2-bootstrap/ng2-bootstrap';
+import { SlimLoadingBarModule } from 'ng2-slim-loading-bar';
 
 
 import { AppComponent } from './app.component';
@@ -20,6 +20,7 @@ import { GithubSearchRoutingModule } from './app-routing.module';
     FormsModule,
     ReactiveFormsModule,
     HttpModule,
+    SlimLoadingBarModule.forRoot(),
     GithubSearchRoutingModule
   ],
   providers: [GithubApiService],

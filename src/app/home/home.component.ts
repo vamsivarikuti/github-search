@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { GithubApiService } from '../shared/github-api.service';
 import { FormBuilder } from '@angular/forms';
+import { SlimLoadingBarService } from 'ng2-slim-loading-bar';
 
 @Component({
   selector: 'app-home',
@@ -13,7 +14,8 @@ export class HomeComponent implements OnInit {
   isLoading: boolean;
 
   constructor(private githubApi: GithubApiService,
-              private fb: FormBuilder) {
+              private fb: FormBuilder,
+              private slimLoadingBar: SlimLoadingBarService) {
   }
 
   ngOnInit() {
@@ -27,11 +29,13 @@ export class HomeComponent implements OnInit {
   }
 
   getRepos(form) {
+    this.slimLoadingBar.start();
     this.isLoading = true;
 
     this.githubApi.searchRepositories(form._value)
       .subscribe(res => {
         this.isLoading = false;
+        this.slimLoadingBar.complete();
         this.repositories = res.items;
       }, err => {
         this.isLoading = false;
